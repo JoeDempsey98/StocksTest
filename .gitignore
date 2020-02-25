@@ -3,3 +3,13 @@
 ################################################################################
 
 /.vs/StocksTest
+/StocksTest/bin/Debug/netcoreapp3.1
+/StocksTestAPI/bin/Debug/netcoreapp3.1
+/StocksTest/obj
+/StocksTestAPI/obj
+/StocksTestDB/bin/Debug
+/StocksTestDB/obj/Debug
+/StocksTestLibrary/bin/Debug/netcoreapp3.1
+/StocksTestLibrary/obj
+/StocksTestDB/StocksTestDB.dbmdl
+/StocksTestDB/StocksTestDB.jfm
