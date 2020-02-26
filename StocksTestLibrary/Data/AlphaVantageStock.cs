@@ -38,19 +38,36 @@ namespace StocksTestLibrary.Data
             {
                 foreach (var j in i)
                 {
-                    StockModel stock = new StockModel();
-                    stock.Open = j["1. open"].ToObject<decimal>();
-                    stock.High = j["2. high"].ToObject<decimal>();
-                    stock.Low = j["3. low"].ToObject<decimal>();
-                    stock.Close = j["4. close"].ToObject<decimal>();
-                    stock.Volume = j["6. volume"].ToObject<long>();
-                    stock.Date = i.ToString().Substring(1, 10);
+                    StockModel stock = new StockModel
+                    {
+                        Open = j["1. open"].ToObject<decimal>(),
+                        High = j["2. high"].ToObject<decimal>(),
+                        Low = j["3. low"].ToObject<decimal>(),
+                        Close = j["4. close"].ToObject<decimal>(),
+                        Volume = j["6. volume"].ToObject<long>(),
+                        Date = i.ToString().Substring(1, 10)
+                    };
+                    stock.Year = Int32.Parse(stock.Date.Substring(0, 4));
+                    stock.Month = Int32.Parse(stock.Date.Substring(5, 2));
+                    stock.Day = Int32.Parse(stock.Date.Substring(8, 2));
+                    stock.AveragePrice = (stock.Open + stock.High + stock.Low + stock.Close) / 4;
                     stock.Ticker = ticker;
 
                     list.Add(stock);
                 }
             }
 
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (i == 0)
+                    list[i].LastAveragePrice = list[i].AveragePrice;
+                else
+                    list[i].LastAveragePrice = list[i - 1].AveragePrice;
+                if (i == list.Count - 1)
+                    list[i].NextAveragePrice = list[i].AveragePrice;
+                else
+                    list[i].NextAveragePrice = list[i + 1].AveragePrice;
+            }
 
             return list;
         }

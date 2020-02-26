@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using StocksTestAPI.Models;
 using StocksTestLibrary.Data;
+using StocksTestLibrary.Models;
 
 namespace StocksTestAPI.Controllers
 {

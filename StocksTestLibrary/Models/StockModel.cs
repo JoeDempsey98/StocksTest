@@ -12,6 +12,12 @@ namespace StocksTestLibrary.Models
         public decimal Close { get; set; }
         public long Volume { get; set; }
         public string Date { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
         public string Ticker { get; set; }
+        public decimal LastAveragePrice { get; set; }
+        public decimal AveragePrice { get; set; }
+        public decimal NextAveragePrice { get; set; }
     }
 }
