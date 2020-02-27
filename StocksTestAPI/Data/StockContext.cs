@@ -1,19 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using StocksTestAPI.Models;
 using StocksTestLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StocksTestAPI.Data
 {
     public class StockContext : DbContext
     {
-        public StockContext()
+        private string _connectionString;
+        public StockContext(IOptions<ConnectionString> connectionString)
         {
+            _connectionString = connectionString.Value.DefaultConnection;
+        }
+        public DbSet<StockModel> Stocks { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
         }
 
-        public DbSet<StockModel> Stocks { get; set; }
     }
 }

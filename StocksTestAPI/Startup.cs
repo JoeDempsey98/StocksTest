@@ -10,12 +10,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using StocksTestAPI.Data;
 using StocksTestAPI.Models;
 
 namespace StocksTestAPI
 {
     public class Startup
     {
+        public string ConnectionString { get; set; }
         //configure db connection
 
         public Startup(IConfiguration configuration)
@@ -30,7 +32,8 @@ namespace StocksTestAPI
         {
             services.AddControllers();
             services.Configure<APIKey>(Configuration.GetSection("APIKey"));
-            
+            services.AddDbContext<StockContext>();
+            services.Configure<ConnectionString>(Configuration.GetSection("ConnectionStrings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
