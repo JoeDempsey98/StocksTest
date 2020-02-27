@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 
 namespace StocksTestLibrary.Data
 {
@@ -63,13 +62,13 @@ namespace StocksTestLibrary.Data
                 for (int i = 0; i < list.Count; i++)
                 {
                     if (i == 0)
-                        list[i].LastAveragePrice = list[i].AveragePrice;
-                    else
-                        list[i].LastAveragePrice = list[i - 1].AveragePrice;
-                    if (i == list.Count - 1)
                         list[i].NextAveragePrice = list[i].AveragePrice;
                     else
-                        list[i].NextAveragePrice = list[i + 1].AveragePrice;
+                        list[i].NextAveragePrice = list[i - 1].AveragePrice;
+                    if (i == list.Count - 1)
+                        list[i].LastAveragePrice = list[i].AveragePrice;
+                    else
+                        list[i].LastAveragePrice = list[i + 1].AveragePrice;
                 }
             }
 
