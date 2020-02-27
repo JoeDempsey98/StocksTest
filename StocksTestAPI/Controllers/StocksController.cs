@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using StocksTestAPI.Data;
 using StocksTestAPI.Models;
 using StocksTestLibrary.Data;
-using StocksTestLibrary.Models;
 
 namespace StocksTestAPI.Controllers
 {
@@ -22,6 +17,22 @@ namespace StocksTestAPI.Controllers
         public StocksController(IOptions<APIKey> apiKey)
         {
             _apiKey = apiKey.Value ?? throw new ArgumentException(nameof(apiKey));
+        }
+
+        public ActionResult<string> GetStockInfo() 
+        {
+            //write a function to fetch dbcontext, and pass it the formatted info to update the database with
+            string[] tickers =
+            {
+                "MSFT",
+                "TSLA",
+                "AAPL",
+                "BABA"
+            };
+
+            var list = AlphaVantageStock.FormatInfo(tickers, _apiKey.AlphaVantageKey);
+
+            return list.ToString();
         }
 
         [HttpGet("{symbol}")]

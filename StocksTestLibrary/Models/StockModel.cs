@@ -6,6 +6,7 @@ namespace StocksTestLibrary.Models
 {
     public class StockModel
     {
+        public int Id { get; set; }
         public decimal Open { get; set; }
         public decimal High { get; set; }
         public decimal Low { get; set; }
